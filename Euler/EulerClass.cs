@@ -21,18 +21,70 @@ namespace EulerNamespace
         {
             var dy=1;
             var mn=1;
-            var CurrentDayOfWeek = 2;                   //Start at Tuesday (2) with a Sunday  being 0.
+            var SundaysOnFirstDayOfTheMonth = 0;
+            var CurrentDayOfWeek = 1;                   //Start at Monday (1) with a Sunday  being 0.
+
+            var tmp = 0;
 
             for (var yr = 1900; yr <= 2000; yr++)
             {
                 var DaysInYear = 365;
                 var isLeapYear = false;
 
+
                 isLeapYear = IsLeapYear(yr);
                 if (isLeapYear) DaysInYear = 366;
 
+                //Every year starts on Month 1 and Day 1
+                dy = 1;
+                mn = 1;
+
+                //Loop through days setting values
+                for (var i = 1; i <= DaysInYear; i++)
+                {
+                    if (dy == 1 && CurrentDayOfWeek == 0 && yr > 1900)
+                    {
+                        // This is a Sunday on the first day of the month (excluding the year 1900)
+                        SundaysOnFirstDayOfTheMonth += 1;
+                    }
+
+                    //Increment the day/weekday and adjust day/month if necessary.
+                    dy += 1;
+                    CurrentDayOfWeek += 1;
+                    if (CurrentDayOfWeek > 6) CurrentDayOfWeek = 0;
+
+                    // Reset Dy/Month using LeapYear / Month rules
+                    switch (mn)
+                    {
+                        case 4:
+                        case 6:
+                        case 9:
+                        case 11:
+                            if (dy > 30)
+                            {
+                                mn += 1;
+                                dy = 1;
+                            }
+                            break;
+                        case 2:
+                            if ((!isLeapYear && dy > 28) || (isLeapYear && dy > 29))
+                            {
+                                mn += 1;
+                                dy = 1;
+                            }
+                            break;
+                        default:
+                            // This is the 31 day month.
+                            if (dy > 31)
+                            {
+                                mn += 1;
+                                dy = 1;
+                            }
+                            break;
+                    }
+                }
             }
-            return (CountSundaysFDOM_TheEasyWay());
+            return (SundaysOnFirstDayOfTheMonth);
         }
 
         public bool IsLeapYear(int yr)
