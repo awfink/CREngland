@@ -8,9 +8,10 @@ namespace EulerNamespace
 {
     public class CountingSundays
     {
-        public void GetDayOfWeek(DateTime dateTime)
+        public string GetDayOfWeek(DateTime dt)
         {
-            throw new NotImplementedException();
+            var x = dt.DayOfWeek;
+            return(x.ToString());
         }
     }
 }
