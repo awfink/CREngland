@@ -20,7 +20,7 @@ namespace UnitTest
         {
             var csObj = new CountingSundays();
             var cnt = csObj.CountSundays();
-            Assert.AreEqual(65, cnt);
+            Assert.AreEqual(5218, cnt);
         }
     }
 }
