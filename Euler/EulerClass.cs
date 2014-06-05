@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace EulerNamespace
 {
-    public class Euler
+    public class CountingSundays
     {
+        public void GetDayOfWeek(DateTime dateTime)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
